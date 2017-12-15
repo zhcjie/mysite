@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+
+{% block title %}blog titles{% endblock %}
+
+{% block content %}
+<div class="row text-center vertial-middle-sm">
+    <h1>伍门教育</h1>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-8"> <!--bootstrap中的格式-->
+        <ul>
+            {% for blog in blogs %}
+            <li><a href="{{blog.id}}">{{blog.title}}</a></li>
+            {% endfor %}
+        </ul>
+        <img width="200px" src="https://mrwallpaper.com/wp-content/uploads/Linux-970x606.jpg">
+    </div>
+
+    <div class="col-xs-6 col-md-4">
+        <h2>广告招商</h2>
+        <p>伍门教育公众号</p>
+        <img width="200px" src="https://mrwallpaper.com/wp-content/uploads/Nature-Trees-Red-Branch-Depth-Of-Field-970x606.jpg">
+    </div>
+
+</div>
+{% endblock %}

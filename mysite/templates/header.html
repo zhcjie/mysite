@@ -1,0 +1,49 @@
+{% load staticfiles %}<!--Django把图片、JavaScript、CSS看做是static files(静态文件)。-->
+
+<div class="container"><!--布局容器: .container 类用于固定宽度并支持响应式布局的容器。-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="http://www.baidu.com">
+                <img src="{% static '/images/wumen-logo.png' %}" height="50px" width="100px" style="margin-top:-15px">
+            </a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav" role="navigation">
+                <li><a href="{% url 'home' %}">HOME</a></li>
+                <li><a href="{% url 'blog:blog_title' %}">BLOG</a></li>
+                <li><a href="{% url 'article:article_titles' %}">文章</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                {% if user.is_authenticated %} <!--is_authenticated返回用户状态，True or False-->
+
+                <li><!--下拉用户菜单-->
+                    <div class="dropdown" style="margin-top:8px">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">{{user.username}}<span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'account:password_change'%}">修改密码</a></li>
+                            <li><a href="{% url 'article:article_column' %}">后台管理</a></li>
+                            <li><a href="{% url 'account:my_information'%}">个人信息</a></li>
+                            <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!--<li><a href="{% url 'blog:blog_title' %}">{{user.username}}</a></li>-->
+                <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+                {% else %}
+                <li>
+                    <!--<a style="margin-right:30px" href="{ # }">LOGIN</a>-->
+                    <a href="{% url 'account:user_login' %}">LOGIN</a>
+                </li>
+                <li><a href="{% url 'account:user_register' %}">Sign up</a></li>
+                {%endif%}
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>--><!--外部jquery-百度静态资源公共库-->
+<script src="{% static 'js/jquery.js' %}"></script> <!--内部jquery-从http://jquery.com/网上下载文件-->
+<script src="{% static 'js/bootstrap.js' %}" ></script>
+

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Logout{% endblock%}
+
+{% block content %}
+<div class="row text-center vertial-middle-sm">
+    <p>You have log out.</p>
+    <!--<p>You can <a href="{% url'account:user_login'%}">Login</a>again</p>-->
+</div>
+{%endblock%}
+
+
+<!--
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="row text-center vertial-middle-sm">
+    <h1>Login</h1>
+    <p>Input you username and password</p>
+    <form class="form-horizontal" action="." method="post">&lt;!&ndash;通过为表单添加 .form-horizontal 类，并联合使用 Bootstrap 预置的栅格类，可以将 label 标签和控件组水平并排布局。&ndash;&gt;
+        {% csrf_token %}
+        &lt;!&ndash;{{ form.as_p}}&ndash;&gt;
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label" style="color:red">
+                <span class="glyphicon glypicon-user"></span>Username
+            </label>  &lt;!&ndash; lable部分是标题;for ？; class 是位置; style 是风格。 span 什么用？ &ndash;&gt;
+            <div class="col-md-6 text-left">
+                {{form.username}}
+            </div>    &lt;!&ndash;div是一个输入框，输入username的实例&ndash;&gt;
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" class="col-md-5 control-label" style="color:blue">
+                <span class="glyphicon glypicon-floppy-open"></span>Password
+            </label>
+            <div class="col-md-6 text-left">
+                {{form.password}}  &lt;!&ndash;什么鬼 ？ &ndash;&gt;
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-5 control-label" style="color:skyblue">
+                <span class="glyphicon glypicon-floppy-open"></span>Remember
+            </label>
+            <div class="col-md-6 text-left">
+                <div class="checkbox  ">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary btn-lg" value="Login">
+
+    </form>
+</div>
+{% endblock %}-->

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}my information{% endblock%}
+{% block content %}
+
+<div class="row text-center vertial-middle-sm">
+    <h1>My Information</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4 text-right"><span>用户名：</span></div>
+                <div class="col-md-8 text-left">{{user.username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>邮箱：</span></div>
+                <div class="col-md-8 text-left">{{user.username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>生日：</span></div>
+                <div class="col-md-8 text-left">{{userprofile.birth}}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 text-right"><span>电话：</span></div>
+                <div class="col-md-8 text-left">{{userprofile.phone}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>毕业学校：</span></div>
+                <div class="col-md-8 text-left">{{userinfo.school}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>工作单位：</span></div>
+                <div class="col-md-8 text-left">{{userinfo.company}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>职业：</span></div>
+                <div class="col-md-8 text-left">{{userinfo.profession}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>地址：</span></div>
+                <div class="col-md-8 text-left">{{userinfo.address}}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-right"><span>个人介绍：</span></div>
+                <div class="col-md-8 text-left">{{userinfo.aboutme}}</div>
+            </div>
+            <div class="row">
+                <a href="{% url 'account:edit_my_information'%}"><button class="btn btn-primary btn-lg">Edit My Information</button></a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!--<p style="margin-right:100px">picture</p>-->
+            {%load staticfiles%}<!--引用静态文件-->
+            <div style="margin-right:100px">
+                <!--<img name="user_face" src=" {% static 'images/1.jpg' %}" class="img-circle" width="270px" id="my_photo" alt="">-->
+                <!--对userinfo.photo判断，如果用户上传图片则显示上传打图片，否则显示默认-->
+                {% if userinfo.photo%}
+                <img src="{{ userinfo.photo|striptags }}" class="img-circle" id="my_photo" name="user_face" >
+                {% else %} <!--管道符：將userinfo.phone這个从数据库中读出来打对象进行过滤。 img-circle表示图像为圆形;img-thumbnai为方形 -->
+                <img name="user_face" src=" {% static 'images/1.jpg' %}" class="img-circle"  name="my_photo" >
+                {% endif %}
+
+            </div>
+
+            <div style="margin-right:100px">
+                <button class="btn btn-primary " id="upload_image" onclick="upload_image_layer()">upload my photo</button>
+            </div><!--onclick="upload_image_layer() ： 会编写这个函数-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script>
+    function upload_image_layer(){
+        layer.open(
+            {
+            //content:'<p>hello world</p>',
+            title:'上传头像',
+            area:['550px','600px'],
+            type:2,
+            content:'{% url 'account:my_image'%}',
+           }
+        );
+    }
+</script>
+{%endblock%}

@@ -1,0 +1,26 @@
+{% load staticfiles %}<!--Django把图片、JavaScript、CSS看做是static files(静态文件)。-->
+
+<div class="container"><!--布局容器: .container 类用于固定宽度并支持响应式布局的容器。-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="http://www.baidu.com">
+                <img src="{% static '/images/wumen-logo.png' %}" height="50px" width="100px" style="margin-top:-15px">
+            </a>
+        </div>
+        <div>
+            <!--<ul class="nav navbar-nav" role="navigation">-->
+            <ul class="nav navbar-nav" role="tablist">
+                <li>
+                    <a href="{% url 'article:article_column' %}">文章管理</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:30px">
+                <li><a href="{% url 'blog:blog_title' %}">网站首页</a></li>
+                <li style="margin-top:15px" ><span >{{user.username}}</span></li>
+                <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+

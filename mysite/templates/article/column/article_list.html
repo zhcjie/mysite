@@ -1,0 +1,62 @@
+{% extends 'article/base.html'%}
+{% load staticfiles %}
+{% block title%}article list{% endblock%}
+{% block content %}
+<!--p133-->
+<div>
+    <table class="table table-hover">
+        <tr>
+            <td>序号</td>
+            <td>标题</td>
+            <td>栏目名称</td>
+            <td>操作</td>
+        </tr>
+        {% for article in articles %} <!--实现表格中每行数据的输出。-->
+        <tr id={{article.id}}>
+            <td>{{forloop.counter}}</td><!--forloop 只在循环内部起作用，模板变量，提示循环进度。本质是显示当前循环次数打计数器。-->
+            <!--<td><a href="{{ article.get_absolute_url }}">{{ article.article }}</a></td>-->
+            <td><a href="{{ article.get_absolute_url }}">{{article.title}}</a></td><!--p136 实现超链接-->
+            <td>{{ article.column }}</td>
+            <td>
+                <a name="editor" href="{% url 'article:redit_article' article.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a name="delete" onclick="del_article(this,{{article.id}})" href="javascript:"><span class="glyphicon glyphicon-trash" style="margin-left:20px;"></span></a>
+            </td>
+        </tr> 
+        {% endfor%}
+    </table>
+    <div class="text-center" style="margin-right:100px;"><!--分页-->
+        {% include "paginator.html" %}
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery.js'%}"> </script>
+<script type="text/javascript" src="{% static 'js/layer.js'%}"> </script>
+<script type="text/javascript">
+    function del_article(the,article_id){
+        var article_name = $(the).parents("tr").children("td").eq(1).text();
+        layer.open({
+            type:1,
+            skin:"layui-layer-rim",
+            area:["400px","200Px"],
+            title:"删除文章",
+            content:'<div class="text-center" style="margin-top:20px"> <p>是否确定删除《'+article_name+'》</p></div>',
+            btn:['确定','取消'],
+            yes:function(){
+                $.ajax({
+                    url: '{% url "article:del_article" %}',
+                    type:"POST",
+                    data:{"article_id":article_id},
+                    success:function(e){
+                        if(e=="1"){
+                            parent.location.reload();
+                            layer.msg("has been deleted.");
+                        }else{
+                            layer.mag("删除失败");
+                        }
+                    },
+                })
+            },
+        }
+        );
+    }
+</script>
+{% endblock %}

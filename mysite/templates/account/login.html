@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row text-center vertial-middle-sm">
+    <h1>Login</h1>
+    <p>Input you username and password</p>
+    <form class="form-horizontal" action="." method="post"><!--通过为表单添加 .form-horizontal 类，并联合使用 Bootstrap 预置的栅格类，可以将 label 标签和控件组水平并排布局。-->
+        {% csrf_token %}
+        <!--{{ form.as_p}}-->
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label" style="color:red">
+                <span class="glyphicon glypicon-user"></span>Username
+            </label>  <!-- lable部分是标题;for ？; class 是位置; style 是风格。 span 什么用？ -->
+            <div class="col-md-6 text-left">
+                {{form.username}}
+            </div>    <!--div是一个输入框，输入username的实例-->
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" class="col-md-5 control-label" style="color:blue">
+                <span class="glyphicon glypicon-floppy-open"></span>Password
+            </label>
+            <div class="col-md-6 text-left">
+                {{form.password}}  <!--什么鬼 ？ -->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-5 control-label" style="color:skyblue">
+                <span class="glyphicon glypicon-floppy-open"></span>Remember
+            </label>
+            <div class="col-md-6 text-left">
+                <div class="checkbox  ">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary btn-lg" value="Login">
+
+    </form>
+
+</div>
+{% endblock %}
